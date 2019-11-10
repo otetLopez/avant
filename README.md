@@ -1,2 +1,2 @@
 # avant
-scheduled message sending app
+Scheduled message sending app
