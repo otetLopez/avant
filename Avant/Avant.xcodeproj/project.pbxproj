@@ -9,21 +9,29 @@
 /* Begin PBXBuildFile section */
 		F527E6162378CD2C00B80116 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F527E6152378CD2C00B80116 /* AppDelegate.swift */; };
 		F527E6182378CD2C00B80116 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F527E6172378CD2C00B80116 /* SceneDelegate.swift */; };
-		F527E61A2378CD2C00B80116 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F527E6192378CD2C00B80116 /* ViewController.swift */; };
 		F527E61D2378CD2C00B80116 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F527E61B2378CD2C00B80116 /* Main.storyboard */; };
 		F527E61F2378CD3000B80116 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F527E61E2378CD3000B80116 /* Assets.xcassets */; };
 		F527E6222378CD3000B80116 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F527E6202378CD3000B80116 /* LaunchScreen.storyboard */; };
+		F527E62B2378D6B600B80116 /* Recipient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F527E62A2378D6B600B80116 /* Recipient.swift */; };
+		F527E62E2378DDBF00B80116 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = F527E62D2378DDBF00B80116 /* Message.swift */; };
+		F527E6302378DF9A00B80116 /* ErrorCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F527E62F2378DF9900B80116 /* ErrorCodes.swift */; };
+		F527E6322378E14E00B80116 /* ListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F527E6312378E14E00B80116 /* ListTableViewController.swift */; };
+		F527E6362378E6E200B80116 /* write_msg.png in Resources */ = {isa = PBXBuildFile; fileRef = F527E6352378E6E100B80116 /* write_msg.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F527E6122378CD2C00B80116 /* Avant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Avant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F527E6152378CD2C00B80116 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F527E6172378CD2C00B80116 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F527E6192378CD2C00B80116 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F527E61C2378CD2C00B80116 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F527E61E2378CD3000B80116 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F527E6212378CD3000B80116 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F527E6232378CD3000B80116 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F527E62A2378D6B600B80116 /* Recipient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipient.swift; sourceTree = "<group>"; };
+		F527E62D2378DDBF00B80116 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		F527E62F2378DF9900B80116 /* ErrorCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCodes.swift; sourceTree = "<group>"; };
+		F527E6312378E14E00B80116 /* ListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewController.swift; sourceTree = "<group>"; };
+		F527E6352378E6E100B80116 /* write_msg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = write_msg.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +64,35 @@
 		F527E6142378CD2C00B80116 /* Avant */ = {
 			isa = PBXGroup;
 			children = (
+				F527E62C2378D82700B80116 /* images */,
+				F527E6292378D6A600B80116 /* src */,
 				F527E6152378CD2C00B80116 /* AppDelegate.swift */,
 				F527E6172378CD2C00B80116 /* SceneDelegate.swift */,
-				F527E6192378CD2C00B80116 /* ViewController.swift */,
 				F527E61B2378CD2C00B80116 /* Main.storyboard */,
 				F527E61E2378CD3000B80116 /* Assets.xcassets */,
 				F527E6202378CD3000B80116 /* LaunchScreen.storyboard */,
 				F527E6232378CD3000B80116 /* Info.plist */,
+				F527E6312378E14E00B80116 /* ListTableViewController.swift */,
 			);
 			path = Avant;
+			sourceTree = "<group>";
+		};
+		F527E6292378D6A600B80116 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				F527E62A2378D6B600B80116 /* Recipient.swift */,
+				F527E62D2378DDBF00B80116 /* Message.swift */,
+				F527E62F2378DF9900B80116 /* ErrorCodes.swift */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		F527E62C2378D82700B80116 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				F527E6352378E6E100B80116 /* write_msg.png */,
+			);
+			path = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,6 +154,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F527E6222378CD3000B80116 /* LaunchScreen.storyboard in Resources */,
+				F527E6362378E6E200B80116 /* write_msg.png in Resources */,
 				F527E61F2378CD3000B80116 /* Assets.xcassets in Resources */,
 				F527E61D2378CD2C00B80116 /* Main.storyboard in Resources */,
 			);
@@ -138,9 +167,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F527E61A2378CD2C00B80116 /* ViewController.swift in Sources */,
 				F527E6162378CD2C00B80116 /* AppDelegate.swift in Sources */,
+				F527E62E2378DDBF00B80116 /* Message.swift in Sources */,
+				F527E6302378DF9A00B80116 /* ErrorCodes.swift in Sources */,
+				F527E6322378E14E00B80116 /* ListTableViewController.swift in Sources */,
 				F527E6182378CD2C00B80116 /* SceneDelegate.swift in Sources */,
+				F527E62B2378D6B600B80116 /* Recipient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
