@@ -29,11 +29,25 @@
                             <outlet property="delegate" destination="gXS-Ef-gT5" id="wQZ-xp-ps5"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Messages" id="jAB-1E-KJX"/>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Bp1-fU-pXc"/>
+                        <barButtonItem title="Item" id="3gP-7W-2Nx"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" title="Messages" id="jAB-1E-KJX">
+                        <rightBarButtonItems>
+                            <barButtonItem image="square.and.pencil" catalog="system" style="plain" id="Cy6-Ci-0Nh">
+                                <color key="tintColor" red="0.48322331909999999" green="0.45169651509999997" blue="0.40133875610000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </barButtonItem>
+                            <barButtonItem image="ellipsis.circle" catalog="system" style="plain" id="LUN-xI-M6d">
+                                <color key="tintColor" red="0.48322331909999999" green="0.45169651509999997" blue="0.40133875610000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kTx-lf-6Nl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-167" y="-61"/>
+            <point key="canvasLocation" x="-168.11594202898553" y="-61.607142857142854"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xlN-qT-f1y">
@@ -57,4 +71,8 @@
             <point key="canvasLocation" x="-1086" y="-61"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ellipsis.circle" catalog="system" width="64" height="62"/>
+        <image name="square.and.pencil" catalog="system" width="64" height="58"/>
+    </resources>
 </document>
