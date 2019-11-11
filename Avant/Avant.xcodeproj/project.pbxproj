@@ -17,6 +17,8 @@
 		F527E6302378DF9A00B80116 /* ErrorCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F527E62F2378DF9900B80116 /* ErrorCodes.swift */; };
 		F527E6322378E14E00B80116 /* ListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F527E6312378E14E00B80116 /* ListTableViewController.swift */; };
 		F527E6362378E6E200B80116 /* write_msg.png in Resources */ = {isa = PBXBuildFile; fileRef = F527E6352378E6E100B80116 /* write_msg.png */; };
+		F527E6382379043D00B80116 /* ComposeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F527E6372379043D00B80116 /* ComposeTableViewController.swift */; };
+		F527E63A2379145E00B80116 /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F527E6392379145E00B80116 /* ComposeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		F527E62F2378DF9900B80116 /* ErrorCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCodes.swift; sourceTree = "<group>"; };
 		F527E6312378E14E00B80116 /* ListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewController.swift; sourceTree = "<group>"; };
 		F527E6352378E6E100B80116 /* write_msg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = write_msg.png; sourceTree = "<group>"; };
+		F527E6372379043D00B80116 /* ComposeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeTableViewController.swift; sourceTree = "<group>"; };
+		F527E6392379145E00B80116 /* ComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +77,8 @@
 				F527E6202378CD3000B80116 /* LaunchScreen.storyboard */,
 				F527E6232378CD3000B80116 /* Info.plist */,
 				F527E6312378E14E00B80116 /* ListTableViewController.swift */,
+				F527E6372379043D00B80116 /* ComposeTableViewController.swift */,
+				F527E6392379145E00B80116 /* ComposeViewController.swift */,
 			);
 			path = Avant;
 			sourceTree = "<group>";
@@ -170,6 +176,8 @@
 				F527E6162378CD2C00B80116 /* AppDelegate.swift in Sources */,
 				F527E62E2378DDBF00B80116 /* Message.swift in Sources */,
 				F527E6302378DF9A00B80116 /* ErrorCodes.swift in Sources */,
+				F527E63A2379145E00B80116 /* ComposeViewController.swift in Sources */,
+				F527E6382379043D00B80116 /* ComposeTableViewController.swift in Sources */,
 				F527E6322378E14E00B80116 /* ListTableViewController.swift in Sources */,
 				F527E6182378CD2C00B80116 /* SceneDelegate.swift in Sources */,
 				F527E62B2378D6B600B80116 /* Recipient.swift in Sources */,
