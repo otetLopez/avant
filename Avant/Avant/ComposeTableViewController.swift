@@ -10,10 +10,12 @@ import UIKit
 
 class ComposeTableViewController: UITableViewController {
 
-    @IBOutlet weak var planeButton: UIButton!
+    var datePickerIndexPath: IndexPath?
+    var isPickingDate : Bool = false
+    //@IBOutlet weak var planeButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        planeButton.tintColor = UIColor.darkGray
+        //planeButton.tintColor = UIColor.darkGray
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -26,23 +28,76 @@ class ComposeTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 2
+        print("DEBUG: Changing number of rows")
+        return  section == 0 ? (datePickerIndexPath != nil ? 5 : 4) : 1
+    
     }
 
-    /*
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        if indexPath.row == 3{
+            print("DEBUG: Setting Schedule \(indexPath.row + 1)")
+            tableView.beginUpdates()
+            if let datePickerIndexPath = datePickerIndexPath, datePickerIndexPath.row - 1 == indexPath.row {
+                tableView.deleteRows(at: [datePickerIndexPath], with: .fade)
+                self.datePickerIndexPath = nil
+            } else {
+                if let datePickerIndexPath = datePickerIndexPath {
+                    tableView.deleteRows(at: [datePickerIndexPath], with: .fade)
+                }
+                datePickerIndexPath = indexPathToInsertDatePicker(indexPath: indexPath)
+                tableView.insertRows(at: [datePickerIndexPath!], with: .fade)
+                tableView.deselectRow(at: indexPath, animated: true)
+            }
+            tableView.endUpdates()
+        }
+    }
+    
+    func indexPathToInsertDatePicker(indexPath: IndexPath) -> IndexPath {
+        if let datePickerIndexPath = datePickerIndexPath, datePickerIndexPath.row < indexPath.row {
+            return indexPath
+        } else {
+            return IndexPath(row: indexPath.row + 1, section: indexPath.section)
+        }
+    }
+    
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "compose", for: indexPath)
         // Configure the cell...
-
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd-MM-yy HH:MM"
+        let result = formatter.string(from: date)
+        
+        var cellLbl : String = ""
+        if indexPath.section == 0 {
+            switch indexPath.row {
+            case 0:
+                cellLbl = "To:"
+            case 1:
+                cellLbl = "From:"
+            case 2:
+                cellLbl = "Subject"
+            case 3:
+                cellLbl = "Schedule"
+                print("DEBUG: The date today is \(result)")
+                cell.detailTextLabel?.text = result
+            default: break
+            }
+        }
+        else if indexPath.section == 1 {
+                //cell.textInputContextIdentifier = "You Message"
+        }
+        cell.textLabel?.text = cellLbl
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
