@@ -21,6 +21,7 @@
 		F527E63A2379145E00B80116 /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F527E6392379145E00B80116 /* ComposeViewController.swift */; };
 		F5C86B33237F328E0071646A /* DateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C86B32237F328E0071646A /* DateTableViewCell.swift */; };
 		F5C86B35237F32CB0071646A /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C86B34237F32CB0071646A /* DatePickerTableViewCell.swift */; };
+		F5C86B3A237F37420071646A /* DatePickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5C86B39237F37410071646A /* DatePickerTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		F527E6392379145E00B80116 /* ComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
 		F5C86B32237F328E0071646A /* DateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTableViewCell.swift; sourceTree = "<group>"; };
 		F5C86B34237F32CB0071646A /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerTableViewCell.swift; sourceTree = "<group>"; };
+		F5C86B39237F37410071646A /* DatePickerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DatePickerTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 		F527E6142378CD2C00B80116 /* Avant */ = {
 			isa = PBXGroup;
 			children = (
+				F5C86B36237F35FA0071646A /* xib */,
 				F527E62C2378D82700B80116 /* images */,
 				F527E6292378D6A600B80116 /* src */,
 				F527E6152378CD2C00B80116 /* AppDelegate.swift */,
@@ -105,6 +108,14 @@
 				F527E6352378E6E100B80116 /* write_msg.png */,
 			);
 			path = images;
+			sourceTree = "<group>";
+		};
+		F5C86B36237F35FA0071646A /* xib */ = {
+			isa = PBXGroup;
+			children = (
+				F5C86B39237F37410071646A /* DatePickerTableViewCell.xib */,
+			);
+			path = xib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -169,6 +180,7 @@
 				F527E6362378E6E200B80116 /* write_msg.png in Resources */,
 				F527E61F2378CD3000B80116 /* Assets.xcassets in Resources */,
 				F527E61D2378CD2C00B80116 /* Main.storyboard in Resources */,
+				F5C86B3A237F37420071646A /* DatePickerTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
