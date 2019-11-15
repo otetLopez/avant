@@ -22,6 +22,9 @@ class ComposeTableViewController: UITableViewController {
         
         tableView.register(UINib(nibName: DateTableViewCell.nibName(), bundle: nil), forCellReuseIdentifier: DateTableViewCell.reuseIdentifier())
         tableView.register(UINib(nibName: DatePickerTableViewCell.nibName(), bundle: nil), forCellReuseIdentifier: DatePickerTableViewCell.reuseIdentifier())
+        
+        tableView.dataSource = self
+        tableView.delegate = self
         //tableView.register(DatePickerTableViewCell.self, forCellReuseIdentifier: "compose")
         //planeButton.tintColor = UIColor.darkGray
 
@@ -94,7 +97,7 @@ class ComposeTableViewController: UITableViewController {
         if datePickerIndexPath == indexPath {
             let datePickerCell = tableView.dequeueReusableCell(withIdentifier: DatePickerTableViewCell.reuseIdentifier()) as! DatePickerTableViewCell
             datePickerCell.updateCell(date: inputDates[indexPath.row - 1], indexPath: indexPath)
-            //datePickerCell.delegate = self
+            datePickerCell.delegate = self
             return datePickerCell
         }
         else {
@@ -132,10 +135,10 @@ class ComposeTableViewController: UITableViewController {
     
    // extension ComposeTableViewController: DatePickerDelegate {
         
-        func didChangeDate(date: Date, indexPath: IndexPath) {
-            inputDates[indexPath.row] = date
-            tableView.reloadRows(at: [indexPath], with: .none)
-        }
+//        func didChangeDate(date: Date, indexPath: IndexPath) {
+//            inputDates[indexPath.row] = date
+//            tableView.reloadRows(at: [indexPath], with: .none)
+//        }
         
   // }
     /*
@@ -183,4 +186,13 @@ class ComposeTableViewController: UITableViewController {
     }
     */
 
+}
+
+extension ComposeTableViewController: DatePickerDelegate {
+    
+    func didChangeDate(date: Date, indexPath: IndexPath) {
+        inputDates[indexPath.row] = date
+        tableView.reloadRows(at: [indexPath], with: .none)
+    }
+    
 }

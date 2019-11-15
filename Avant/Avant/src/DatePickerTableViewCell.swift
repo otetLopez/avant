@@ -55,6 +55,7 @@ class DatePickerTableViewCell: UITableViewCell {
     }
     
     @objc func dateDidChange(_ sender: UIDatePicker) {
+        print("DEBUG: dateDidChange")
         let indexPathForDisplayDate = IndexPath(row: indexPath.row - 1, section: indexPath.section)
         delegate?.didChangeDate(date: sender.date, indexPath: indexPathForDisplayDate)
     }
