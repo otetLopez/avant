@@ -158,7 +158,13 @@ class ComposeTableViewController: UITableViewController {
         return UITableViewCell()
     }
     
-   // extension ComposeTableViewController: DatePickerDelegate {
+    @IBAction func setmsgButton(_ sender: UIButton) {
+        var details : String = "Setting message on \(date)"
+        details.append("\n\(tfTitle.text)\nTo \(tfRecipient.text)\nFrom\(tfSender.text)\nMessage:\n\(tfBody.text)")
+        print(details)
+    }
+
+    // extension ComposeTableViewController: DatePickerDelegate {
         
 //        func didChangeDate(date: Date, indexPath: IndexPath) {
 //            inputDates[indexPath.row] = date

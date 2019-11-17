@@ -211,6 +211,17 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="New Message" largeTitleDisplayMode="never" id="Uvb-7z-YSs">
                         <barButtonItem key="backBarButtonItem" tag="1" springLoaded="YES" systemItem="cancel" id="UTV-Uj-EF4"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="ySm-Sb-XOS">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="32d-b6-uLF">
+                                <rect key="frame" x="373" y="11" width="21" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.48322331909999999" green="0.45169651509999997" blue="0.40133875610000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" image="paperplane" catalog="system"/>
+                                <connections>
+                                    <action selector="setmsgButton:" destination="Xga-OV-GOS" eventType="touchUpInside" id="Jqz-Sk-z6g"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tna-f7-PcT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
