@@ -18,11 +18,17 @@ class ComposeTableViewController: UITableViewController {
     var date = Date()
     let formatter = DateFormatter()
     
-    
+    /** This is for the user input text field **/
+    let tfBody = UITextField(frame: CGRect(x: 10, y: 12, width: 200, height: 20))
+    let tfRecipient = UITextField(frame: CGRect(x: 50, y: 12, width: 300, height: 20))
+    let tfTitle = UITextField(frame: CGRect(x: 130, y: 12, width: 300, height: 20))
+    let tfSender = UITextField(frame: CGRect(x: 70, y: 12, width: 300, height: 20))
+
     //@IBOutlet weak var planeButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setuptfs()
         addInitailValues()
         formatter.dateFormat = "dd-MM-yy HH:mm"
         
@@ -78,6 +84,20 @@ class ComposeTableViewController: UITableViewController {
         inputDates = Array(repeating: Date(), count: 10)
     }
     
+    func setuptfs() {
+        tfBody.font = UIFont.systemFont(ofSize: 15)
+        tfBody.placeholder = "Your email body here..."
+        
+        tfRecipient.font = UIFont.systemFont(ofSize: 15)
+        tfRecipient.placeholder = "recipient@email.com"
+        
+        tfSender.font = UIFont.systemFont(ofSize: 15)
+        tfSender.placeholder = "sender@email.com"
+        
+        tfTitle.font = UIFont.systemFont(ofSize: 15)
+        tfTitle.placeholder = "Some title"
+    }
+    
     func indexPathToInsertDatePicker(indexPath: IndexPath) -> IndexPath {
         print("DEBUG: Inserting Date Picker")
         if let datePickerIndexPath = datePickerIndexPath, datePickerIndexPath.row < indexPath.row {
@@ -115,22 +135,13 @@ class ComposeTableViewController: UITableViewController {
                 switch indexPath.row {
                 case 0:
                     cellLbl = "To:"
-                    let tf = UITextField(frame: CGRect(x: 50, y: 12, width: 300, height: 20))
-                    tf.font = UIFont.systemFont(ofSize: 15)
-                    tf.placeholder = "recipient@email.com"
-                    cell.contentView.addSubview(tf)
+                    cell.contentView.addSubview(tfRecipient)
                 case 1:
                     cellLbl = "From:"
-                    let tf = UITextField(frame: CGRect(x: 70, y: 12, width: 300, height: 20))
-                    tf.font = UIFont.systemFont(ofSize: 15)
-                    tf.placeholder = "sender@email.com"
-                    cell.contentView.addSubview(tf)
+                    cell.contentView.addSubview(tfSender)
                 case 2:
                     cellLbl = "Message Title:"
-                    let tf = UITextField(frame: CGRect(x: 130, y: 12, width: 300, height: 20))
-                    tf.font = UIFont.systemFont(ofSize: 15)
-                    tf.placeholder = "Some title"
-                    cell.contentView.addSubview(tf)
+                    cell.contentView.addSubview(tfTitle)
                 case 3:
                     cellLbl = "Schedule"
                     print("DEBUG: The date today is \(result)")
@@ -139,11 +150,7 @@ class ComposeTableViewController: UITableViewController {
                 }
             }
             else if indexPath.section == 1 {
-                //cell.textInputContextIdentifier = "You Message"
-                let tf = UITextField(frame: CGRect(x: 10, y: 12, width: 200, height: 20))
-                tf.font = UIFont.systemFont(ofSize: 15)
-                tf.placeholder = "Your email body here..."
-                cell.contentView.addSubview(tf)
+                cell.contentView.addSubview(tfBody)
             }
             cell.textLabel?.text = cellLbl
             return cell
