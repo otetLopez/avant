@@ -46,8 +46,12 @@ class ListTableViewController: UITableViewController {
         return cell
     }
     
-    
-    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let DeleteAction = UIContextualAction(style: .destructive, title: "Delete", handler: { (action, view, success) in
+        self.msgs.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .fade)})
+        return UISwipeActionsConfiguration(actions: [DeleteAction])
+    }
     
     func addMsg (newMsg : Message) {
         msgs.append(newMsg)
