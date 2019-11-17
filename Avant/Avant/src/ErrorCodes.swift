@@ -10,5 +10,9 @@ import Foundation
 
 enum ErrorCodes {
     case SUCESSFUL
+    case ERR_MISSING_MSG_TITLE
+    case ERR_MISSING_SENDER
+    case ERR_MISSING_RECIPIENT
+    case ERR_MISSING_MESSAGE
     case ERROR_UKNOWN
 }

@@ -10,6 +10,8 @@ import UIKit
 
 class ComposeTableViewController: UITableViewController {
 
+     weak var delegateMsgList: ListTableViewController?
+    
     var datePickerIndexPath: IndexPath?
     var isPickingDate : Bool = false
     var inputTexts: [String] = ["Start date", "End date", "Another date"]
@@ -162,6 +164,10 @@ class ComposeTableViewController: UITableViewController {
         var details : String = "Setting message on \(date)"
         details.append("\n\(tfTitle.text)\nTo \(tfRecipient.text)\nFrom\(tfSender.text)\nMessage:\n\(tfBody.text)")
         print(details)
+        
+        let newMsg : Message = Message(recipient: tfRecipient.text!, sender: tfSender.text!, title: tfTitle.text!, msg: tfBody.text!, schedule: date)
+        
+        self.delegateMsgList?.addMsg(newMsg: newMsg)
     }
 
     // extension ComposeTableViewController: DatePickerDelegate {

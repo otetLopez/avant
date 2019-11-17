@@ -10,6 +10,7 @@ import UIKit
 
 class ListTableViewController: UITableViewController {
 
+    var msgs = [Message]()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,18 +30,30 @@ class ListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return msgs.count
     }
 
-    /*
+    override func viewDidAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "msglist", for: indexPath)
+        cell.textLabel?.text = msgs[indexPath.row].title
+        cell.detailTextLabel?.text = msgs[indexPath.row].sender
         // Configure the cell...
 
         return cell
     }
-    */
+    
+    
+    
+    
+    func addMsg (newMsg : Message) {
+        msgs.append(newMsg)
+    }
+    
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -84,6 +97,10 @@ class ListTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if let compose = segue.destination as? ComposeTableViewController {
+            compose.delegateMsgList = self
+        }
+        
         
         let backItem = UIBarButtonItem()
         backItem.title = "Cancel"

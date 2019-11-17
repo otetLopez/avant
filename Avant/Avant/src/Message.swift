@@ -9,12 +9,15 @@
 import Foundation
 
 struct Message : CustomStringConvertible {
-    var recipient : Recipient
+    //var recipient : Recipient
+    var recipient : String
+    var sender : String
+    var title : String
     var msg : String
     var schedule : Date
     
     var description: String {
-        let formattedStr = "To:\t\(self.recipient.email)\nSchedule:\t\(self.schedule)\nMessage:\n\t\t\(self.msg)"
+        let formattedStr = "To:\t\(self.recipient)\nSchedule:\t\(self.schedule)\nMessage:\n\t\t\(self.msg)"
         return formattedStr
     }
 }
