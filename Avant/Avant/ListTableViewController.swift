@@ -11,6 +11,7 @@ import UIKit
 class ListTableViewController: UITableViewController {
 
     var msgs = [Message]()
+    var msgIdx : Int = -1
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,15 +36,21 @@ class ListTableViewController: UITableViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         tableView.reloadData()
+        msgIdx = -1
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "msglist", for: indexPath)
         cell.textLabel?.text = msgs[indexPath.row].title
-        cell.detailTextLabel?.text = msgs[indexPath.row].sender
+        cell.detailTextLabel?.text = msgs[indexPath.row].recipient
         // Configure the cell...
 
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        msgIdx = indexPath.row
+        print("DEBUG: You selected msg \(msgs[indexPath.row].title)")
     }
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -55,6 +62,14 @@ class ListTableViewController: UITableViewController {
     
     func addMsg (newMsg : Message) {
         msgs.append(newMsg)
+    }
+    
+    func addMsg (newMsg : Message, idx : Int) {
+        msgs.insert(newMsg, at: idx)
+    }
+    
+    func deleteMsg(idx : Int) {
+        msgs.remove(at: idx)
     }
     
     

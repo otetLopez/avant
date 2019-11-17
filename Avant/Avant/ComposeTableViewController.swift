@@ -17,8 +17,9 @@ class ComposeTableViewController: UITableViewController {
     var inputTexts: [String] = ["Start date", "End date", "Another date"]
     var inputDates: [Date] = []
     
-    var date = Date()
+    var date : Date = Date()
     let formatter = DateFormatter()
+    var msgIdx : Int = -1
     
     /** This is for the user input text field **/
     let tfBody = UITextField(frame: CGRect(x: 10, y: 12, width: 200, height: 20))
@@ -30,6 +31,7 @@ class ComposeTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        msgIdx = self.delegateMsgList!.msgIdx
         setuptfs()
         addInitailValues()
         formatter.dateFormat = "dd-MM-yy HH:mm"
@@ -88,17 +90,42 @@ class ComposeTableViewController: UITableViewController {
     
     func setuptfs() {
         tfBody.font = UIFont.systemFont(ofSize: 15)
-        tfBody.placeholder = "Your email body here..."
-        
         tfRecipient.font = UIFont.systemFont(ofSize: 15)
-        tfRecipient.placeholder = "recipient@email.com"
-        
         tfSender.font = UIFont.systemFont(ofSize: 15)
-        tfSender.placeholder = "sender@email.com"
-        
         tfTitle.font = UIFont.systemFont(ofSize: 15)
+        tfBody.placeholder = "Your email body here..."
+        tfRecipient.placeholder = "recipient@email.com"
+        tfSender.placeholder = "sender@email.com"
         tfTitle.placeholder = "Some title"
+        tfRecipient.autocorrectionType = .no
+        tfSender.autocorrectionType = .no
+        tfTitle.autocorrectionType = .no
+        tfBody.autocorrectionType = .no
+        
+        tfRecipient.autocapitalizationType = .none
+        tfSender.autocapitalizationType = .none
+        
+        if msgIdx >= 0 {
+            tfBody.text = self.delegateMsgList?.msgs[msgIdx].msg
+            tfRecipient.text = self.delegateMsgList?.msgs[msgIdx].recipient
+            tfSender.text = self.delegateMsgList?.msgs[msgIdx].sender
+            tfTitle.text = self.delegateMsgList?.msgs[msgIdx].title
+            date = (self.delegateMsgList?.msgs[msgIdx].schedule)!
+        }
     }
+    
+    func clearFlds() {
+        msgIdx = -1
+        self.delegateMsgList?.msgIdx = msgIdx
+        
+        tfBody.text?.removeAll()
+        tfRecipient.text?.removeAll()
+        tfSender.text?.removeAll()
+        tfTitle.text?.removeAll()
+        date = Date()
+        tableView.reloadData()
+    }
+
     
     func indexPathToInsertDatePicker(indexPath: IndexPath) -> IndexPath {
         print("DEBUG: Inserting Date Picker")
@@ -167,9 +194,15 @@ class ComposeTableViewController: UITableViewController {
         
         let newMsg : Message = Message(recipient: tfRecipient.text!, sender: tfSender.text!, title: tfTitle.text!, msg: tfBody.text!, schedule: date)
         
-        self.delegateMsgList?.addMsg(newMsg: newMsg)
+        if msgIdx >= 0 {
+            self.delegateMsgList?.deleteMsg(idx: msgIdx)
+            self.delegateMsgList?.addMsg(newMsg: newMsg, idx: msgIdx)
+        } else {
+            self.delegateMsgList?.addMsg(newMsg: newMsg) }
+        
+        clearFlds()
     }
-
+    
     // extension ComposeTableViewController: DatePickerDelegate {
         
 //        func didChangeDate(date: Date, indexPath: IndexPath) {
