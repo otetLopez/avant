@@ -14,11 +14,17 @@ class ComposeTableViewController: UITableViewController {
     var isPickingDate : Bool = false
     var inputTexts: [String] = ["Start date", "End date", "Another date"]
     var inputDates: [Date] = []
+    
+    var date = Date()
+    let formatter = DateFormatter()
+    
+    
     //@IBOutlet weak var planeButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         
         addInitailValues()
+        formatter.dateFormat = "dd-MM-yy HH:mm"
         
         tableView.register(UINib(nibName: DateTableViewCell.nibName(), bundle: nil), forCellReuseIdentifier: DateTableViewCell.reuseIdentifier())
         tableView.register(UINib(nibName: DatePickerTableViewCell.nibName(), bundle: nil), forCellReuseIdentifier: DatePickerTableViewCell.reuseIdentifier())
@@ -92,8 +98,6 @@ class ComposeTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
-        
         if datePickerIndexPath == indexPath {
             let datePickerCell = tableView.dequeueReusableCell(withIdentifier: DatePickerTableViewCell.reuseIdentifier()) as! DatePickerTableViewCell
             datePickerCell.updateCell(date: inputDates[indexPath.row - 1], indexPath: indexPath)
@@ -103,9 +107,7 @@ class ComposeTableViewController: UITableViewController {
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "compose", for: indexPath)
             // Configure the cell...
-            let date = Date()
-            let formatter = DateFormatter()
-            formatter.dateFormat = "dd-MM-yy HH:MM"
+
             let result = formatter.string(from: date)
             
             var cellLbl : String = ""
@@ -113,10 +115,22 @@ class ComposeTableViewController: UITableViewController {
                 switch indexPath.row {
                 case 0:
                     cellLbl = "To:"
+                    let tf = UITextField(frame: CGRect(x: 50, y: 12, width: 300, height: 20))
+                    tf.font = UIFont.systemFont(ofSize: 15)
+                    tf.placeholder = "recipient@email.com"
+                    cell.contentView.addSubview(tf)
                 case 1:
                     cellLbl = "From:"
+                    let tf = UITextField(frame: CGRect(x: 70, y: 12, width: 300, height: 20))
+                    tf.font = UIFont.systemFont(ofSize: 15)
+                    tf.placeholder = "sender@email.com"
+                    cell.contentView.addSubview(tf)
                 case 2:
-                    cellLbl = "Subject"
+                    cellLbl = "Message Title:"
+                    let tf = UITextField(frame: CGRect(x: 130, y: 12, width: 300, height: 20))
+                    tf.font = UIFont.systemFont(ofSize: 15)
+                    tf.placeholder = "Some title"
+                    cell.contentView.addSubview(tf)
                 case 3:
                     cellLbl = "Schedule"
                     print("DEBUG: The date today is \(result)")
@@ -125,7 +139,11 @@ class ComposeTableViewController: UITableViewController {
                 }
             }
             else if indexPath.section == 1 {
-                    //cell.textInputContextIdentifier = "You Message"
+                //cell.textInputContextIdentifier = "You Message"
+                let tf = UITextField(frame: CGRect(x: 10, y: 12, width: 200, height: 20))
+                tf.font = UIFont.systemFont(ofSize: 15)
+                tf.placeholder = "Your email body here..."
+                cell.contentView.addSubview(tf)
             }
             cell.textLabel?.text = cellLbl
             return cell
@@ -192,6 +210,7 @@ extension ComposeTableViewController: DatePickerDelegate {
     
     func didChangeDate(date: Date, indexPath: IndexPath) {
         inputDates[indexPath.row] = date
+        self.date = date
         tableView.reloadRows(at: [indexPath], with: .none)
     }
     
