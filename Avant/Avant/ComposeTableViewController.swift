@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MessageUI
 
-class ComposeTableViewController: UITableViewController {
+class ComposeTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
 
      weak var delegateMsgList: ListTableViewController?
     
@@ -108,7 +109,7 @@ class ComposeTableViewController: UITableViewController {
         if msgIdx >= 0 {
             tfBody.text = self.delegateMsgList?.msgs[msgIdx].msg
             tfRecipient.text = self.delegateMsgList?.msgs[msgIdx].recipient
-            tfSender.text = self.delegateMsgList?.msgs[msgIdx].sender
+            tfSender.text = self.delegateMsgList?.msgs[msgIdx].cc
             tfTitle.text = self.delegateMsgList?.msgs[msgIdx].title
             date = (self.delegateMsgList?.msgs[msgIdx].schedule)!
         }
@@ -123,6 +124,11 @@ class ComposeTableViewController: UITableViewController {
         tfSender.text?.removeAll()
         tfTitle.text?.removeAll()
         date = Date()
+        
+        // TODO
+        //tableView.deleteRows(at: [datePickerIndexPath!], with: .fade)
+        //self.datePickerIndexPath = nil
+        
         tableView.reloadData()
     }
 
@@ -189,10 +195,10 @@ class ComposeTableViewController: UITableViewController {
     
     @IBAction func setmsgButton(_ sender: UIButton) {
         var details : String = "Setting message on \(date)"
-        details.append("\n\(tfTitle.text)\nTo \(tfRecipient.text)\nFrom\(tfSender.text)\nMessage:\n\(tfBody.text)")
+        details.append("\n\(tfTitle.text)\nTo \(tfRecipient.text)\nCC\(tfSender.text)\nMessage:\n\(tfBody.text)")
         print(details)
         
-        let newMsg : Message = Message(recipient: tfRecipient.text!, sender: tfSender.text!, title: tfTitle.text!, msg: tfBody.text!, schedule: date)
+        let newMsg : Message = Message(recipient: tfRecipient.text!, cc: tfSender.text!, title: tfTitle.text!, msg: tfBody.text!, schedule: date)
         
         if msgIdx >= 0 {
             self.delegateMsgList?.deleteMsg(idx: msgIdx)
@@ -201,6 +207,28 @@ class ComposeTableViewController: UITableViewController {
             self.delegateMsgList?.addMsg(newMsg: newMsg) }
         
         clearFlds()
+        
+       
+        if MFMailComposeViewController.canSendMail() {
+            let mailComposeViewController = configureMailComposer(newMsg: newMsg)
+            present(mailComposeViewController, animated: true, completion: nil)
+        } else {
+            print("DEBUG: Cannot send email")
+        }
+    }
+    
+    func configureMailComposer(newMsg: Message) -> MFMailComposeViewController{
+                let mail = MFMailComposeViewController()
+                mail.mailComposeDelegate = self
+        mail.setSubject(newMsg.title)
+        mail.setCcRecipients([newMsg.cc])
+        mail.setToRecipients([newMsg.recipient])
+        mail.setMessageBody("\(newMsg.msg)", isHTML: true)
+        return mail
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
     }
     
     // extension ComposeTableViewController: DatePickerDelegate {

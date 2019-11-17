@@ -22,6 +22,7 @@
 		F5C86B33237F328E0071646A /* DateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C86B32237F328E0071646A /* DateTableViewCell.swift */; };
 		F5C86B35237F32CB0071646A /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C86B34237F32CB0071646A /* DatePickerTableViewCell.swift */; };
 		F5C86B3A237F37420071646A /* DatePickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5C86B39237F37410071646A /* DatePickerTableViewCell.xib */; };
+		F5C86B3C2381F3DF0071646A /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C86B3B2381F3DF0071646A /* Email.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		F5C86B32237F328E0071646A /* DateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTableViewCell.swift; sourceTree = "<group>"; };
 		F5C86B34237F32CB0071646A /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerTableViewCell.swift; sourceTree = "<group>"; };
 		F5C86B39237F37410071646A /* DatePickerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DatePickerTableViewCell.xib; sourceTree = "<group>"; };
+		F5C86B3B2381F3DF0071646A /* Email.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Email.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				F527E62F2378DF9900B80116 /* ErrorCodes.swift */,
 				F5C86B32237F328E0071646A /* DateTableViewCell.swift */,
 				F5C86B34237F32CB0071646A /* DatePickerTableViewCell.swift */,
+				F5C86B3B2381F3DF0071646A /* Email.swift */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -195,6 +198,7 @@
 				F527E62E2378DDBF00B80116 /* Message.swift in Sources */,
 				F527E6302378DF9A00B80116 /* ErrorCodes.swift in Sources */,
 				F527E63A2379145E00B80116 /* ComposeViewController.swift in Sources */,
+				F5C86B3C2381F3DF0071646A /* Email.swift in Sources */,
 				F527E6382379043D00B80116 /* ComposeTableViewController.swift in Sources */,
 				F527E6322378E14E00B80116 /* ListTableViewController.swift in Sources */,
 				F527E6182378CD2C00B80116 /* SceneDelegate.swift in Sources */,
@@ -345,7 +349,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2695693848;
+				DEVELOPMENT_TEAM = 7YDJ6J5D4V;
 				INFOPLIST_FILE = Avant/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

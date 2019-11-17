@@ -11,7 +11,7 @@ import Foundation
 struct Message : CustomStringConvertible {
     //var recipient : Recipient
     var recipient : String
-    var sender : String
+    var cc : String
     var title : String
     var msg : String
     var schedule : Date
