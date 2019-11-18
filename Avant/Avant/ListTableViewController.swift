@@ -149,7 +149,7 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
         UNUserNotificationCenter.current().delegate = self
 
         // Define Actions
-        let actionSend = UNNotificationAction(identifier: Notification.Action.send, title: "Send It!", options: [])
+        let actionSend = UNNotificationAction(identifier: Notification.Action.send, title: "Send It!", options: [.foreground])
 //        let actionShowDetails = UNNotificationAction(identifier: Notification.Action.showDetails, title: "Show Details", options: [.foreground])
         let actionUnsubscribe = UNNotificationAction(identifier: Notification.Action.cancel, title: "Cancel", options: [.destructive, .authenticationRequired])
 
