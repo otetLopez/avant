@@ -71,16 +71,42 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         //msgIdx = indexPath.row
         print("DEBUG: You selected to view Msg \(msgs[indexPath.row]) at \(indexPath.row)")
-        alert(title: "Message not yet sent", msg: "\(msgs[indexPath.row])")
+        if checkDate(date: msgs[indexPath.row].schedule) {
+            alert(title: "Message not yet sent", msg: "\(msgs[indexPath.row])")
+        } else {
+            // We need to let user send email
+            alert(title: "Your message is due", idx: indexPath.row)
+        }
         
+    }
+    
+    func checkDate(date: Date) -> Bool {
+        if date <  Date() {
+            print("DEBUG: date is earlier than current date")
+            return false
+        }
+        return true
+    }
+    
+    func alert(title: String, idx: Int) {
+        let alertController = UIAlertController(title: title, message: "\(msgs[idx])", preferredStyle: .alert)
+
+        let cancelAction = UIAlertAction(title: "Ignore", style: .cancel, handler: nil)
+        let sendAction = UIAlertAction(title: "Send It!", style: .destructive) { (action) in
+            self.sendemail(idx: idx)
+            self.updateLists(idx: idx)
+        }
+        sendAction.setValue(UIColor.red, forKey: "titleTextColor")
+
+        alertController.addAction(cancelAction)
+        alertController.addAction(sendAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func alert(title: String, msg : String) {
         let alertController = UIAlertController(title: title, message: msg, preferredStyle: .alert)
-          
         let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alertController.addAction(okAction)
-    
         self.present(alertController, animated: true, completion: nil)
     }
     
@@ -205,6 +231,14 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
         }
     }
     
+    func sendemail(idx: Int) {
+        if MFMailComposeViewController.canSendMail() {
+            let mailComposeViewController = configureMailComposer(newMsg: msgs[idx])
+            present(mailComposeViewController, animated: true, completion: nil)
+            updateLists(idx: idx)
+        } else { print("DEBUG: Cannot send email") }
+    }
+    
     func sendemail(id : String) {
         var isMsgSending : Bool = false
         var msgToSend : Message
@@ -236,15 +270,7 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
         return mail
     }
     
-    //func updateLists(msg : Message) {
     func updateLists(idx : Int) {
-//        var idx : Int = 0
-//        for message in msgs {
-//            if message.msgId == msg.msgId {
-//                break
-//            }
-//            idx += 1
-//        }
         sent.append(msgs[idx])
         msgs.remove(at: idx)
         tableView.reloadData()
