@@ -53,13 +53,14 @@ class ComposeTableViewController: UITableViewController, MFMailComposeViewContro
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return  section == 0 ? (datePickerIndexPath != nil ? 5 : 4) : 1
+        //return  section == 0 ? (datePickerIndexPath != nil ? 5 : 4) : 1  //removed CC no time to support
+        return  section == 0 ? (datePickerIndexPath != nil ? 4 : 3) : 1
     
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        if indexPath.row == 3{
+        if indexPath.row == 2 { //3 {
             tableView.beginUpdates()
             if let datePickerIndexPath = datePickerIndexPath, datePickerIndexPath.row - 1 == indexPath.row {
                 tableView.deleteRows(at: [datePickerIndexPath], with: .fade)
@@ -225,13 +226,13 @@ class ComposeTableViewController: UITableViewController, MFMailComposeViewContro
                 case 0:
                     cellLbl = "To:"
                     cell.contentView.addSubview(tfRecipient)
+                //case 1:
+                //    cellLbl = "Cc:"
+                //    cell.contentView.addSubview(tfSender)
                 case 1:
-                    cellLbl = "Cc:"
-                    cell.contentView.addSubview(tfSender)
-                case 2:
                     cellLbl = "Message Title:"
                     cell.contentView.addSubview(tfTitle)
-                case 3:
+                case 2:
                     cellLbl = "Schedule"
                     print("DEBUG: The date today is \(result)")
                     cell.detailTextLabel?.text = result
