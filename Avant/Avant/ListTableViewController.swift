@@ -258,6 +258,7 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
                     present(mailComposeViewController, animated: true, completion: nil)
                     //updateLists(msg: msgToSend)
                     updateLists(idx: idx)
+                    //mailComposeViewController.dismiss(animated: true, completion: nil)
                 } else { print("DEBUG: Cannot send email") }
                 break
             }
@@ -275,6 +276,18 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
         mail.setToRecipients([newMsg.recipient])
         mail.setMessageBody("\(newMsg.msg)", isHTML: true)
         return mail
+    }
+    
+     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        // Dismiss the mail compose view controller.
+        print("DEBUG: Message is sent")
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+         print("DEBUG: Message is sent 2 ")
+        // Dismiss the mail compose view controller.
+        controller.dismiss(animated: true, completion: nil)
     }
     
     func updateLists(idx : Int) {
