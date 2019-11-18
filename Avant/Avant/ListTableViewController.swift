@@ -8,23 +8,24 @@
 
 import UIKit
 import UserNotifications
+import MessageUI
 
-class ListTableViewController: UITableViewController, UNUserNotificationCenterDelegate {
+class ListTableViewController: UITableViewController, UNUserNotificationCenterDelegate, MFMailComposeViewControllerDelegate {
 
     struct Notification {
         struct Category {
             static let alarm = "Reminder"
         }
         struct Action {
-            static let readLater = "readLater"
-            static let showDetails = "showDetails"
-            static let unsubscribe = "unsubscribe"
+            static let send = "sendEmail"
+            static let cancel = "cancel"
         }
     }
     
     var msgs = [Message]()
     var msgIdx : Int = -1
     var isEditingList : Bool = false
+    var msgToSend : Message?
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUserNotificationsCenter()
@@ -117,6 +118,9 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
     }
     
     func addNotification (msg: Message) {
+        // TO DO needs to be changed
+        msgToSend = msg
+        
         // Request Notification Settings
         UNUserNotificationCenter.current().getNotificationSettings { (notificationSettings) in
             switch notificationSettings.authorizationStatus {
@@ -145,12 +149,12 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
         UNUserNotificationCenter.current().delegate = self
 
         // Define Actions
-        let actionReadLater = UNNotificationAction(identifier: Notification.Action.readLater, title: "Read Later", options: [])
-        let actionShowDetails = UNNotificationAction(identifier: Notification.Action.showDetails, title: "Show Details", options: [.foreground])
-        let actionUnsubscribe = UNNotificationAction(identifier: Notification.Action.unsubscribe, title: "Unsubscribe", options: [.destructive, .authenticationRequired])
+        let actionSend = UNNotificationAction(identifier: Notification.Action.send, title: "Send It!", options: [])
+//        let actionShowDetails = UNNotificationAction(identifier: Notification.Action.showDetails, title: "Show Details", options: [.foreground])
+        let actionUnsubscribe = UNNotificationAction(identifier: Notification.Action.cancel, title: "Cancel", options: [.destructive, .authenticationRequired])
 
         // Define Category
-        let category = UNNotificationCategory(identifier: Notification.Category.alarm, actions: [actionReadLater, actionShowDetails, actionUnsubscribe], intentIdentifiers: [], options: [])
+        let category = UNNotificationCategory(identifier: Notification.Category.alarm, actions: [actionSend, actionUnsubscribe], intentIdentifiers: [], options: [])
 
         // Register Category
         UNUserNotificationCenter.current().setNotificationCategories([category])
@@ -162,7 +166,6 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
             if let error = error {
                 print("Request Authorization Failed (\(error), \(error.localizedDescription))")
             }
-
             completionHandler(success)
         }
     }
@@ -196,6 +199,23 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
         }
     }
     
+    func sendemail() {
+        if MFMailComposeViewController.canSendMail() {
+            let mailComposeViewController = configureMailComposer(newMsg: msgToSend!)
+            present(mailComposeViewController, animated: true, completion: nil)
+        } else { print("DEBUG: Cannot send email") }
+    }
+        
+    func configureMailComposer(newMsg: Message) -> MFMailComposeViewController  {
+        let mail = MFMailComposeViewController()
+        mail.mailComposeDelegate = self
+        mail.setSubject(newMsg.title)
+        mail.setCcRecipients([newMsg.cc])
+        mail.setToRecipients([newMsg.recipient])
+        mail.setMessageBody("\(newMsg.msg)", isHTML: true)
+        return mail
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
@@ -213,21 +233,20 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
 }
 
 extension ListTableViewController {
-
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.alert])
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         switch response.actionIdentifier {
-        case Notification.Action.readLater:
-            print("Save Tutorial For Later")
-        case Notification.Action.unsubscribe:
-            print("Unsubscribe Reader")
+        case Notification.Action.send:
+            print("DEBUG: Sending your precious email")
+            sendemail()
+        case Notification.Action.cancel:
+            print("DEBUG: Ignoring whatever you have decided to set day(s) ago")
         default:
             print("Other Action")
         }
-
         completionHandler()
     }
 }
