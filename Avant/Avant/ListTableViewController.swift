@@ -184,10 +184,14 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
         var dateComponents = DateComponents()
         let calendar = Calendar.current
         
+        dateComponents.year = calendar.component(.year, from: alertMsg.schedule)
+        dateComponents.month = calendar.component(.month, from: alertMsg.schedule)
+        dateComponents.day = calendar.component(.day, from: alertMsg.schedule)
         dateComponents.hour = calendar.component(.hour, from: alertMsg.schedule)
         dateComponents.minute = calendar.component(.minute, from: alertMsg.schedule)
         dateComponents.second = calendar.component(.second, from: alertMsg.schedule)
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
 
         let request = UNNotificationRequest(identifier: /*UUID().uuidString*/"cocoacasts_local_notification", content: content, trigger: trigger)
         center.add(request)
