@@ -60,6 +60,22 @@ class ListTableViewController: UITableViewController {
         return UISwipeActionsConfiguration(actions: [DeleteAction])
     }
     
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        msgIdx = indexPath.row
+        print("DEBUG: You selected to view Msg \(msgs[indexPath.row]) at \(msgIdx)")
+        alert(title: "Message not yet sent", msg: "\(msgs[indexPath.row])")
+        
+    }
+    
+    func alert(title: String, msg : String) {
+        let alertController = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+          
+        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alertController.addAction(okAction)
+    
+        self.present(alertController, animated: true, completion: nil)
+    }
+        
     func addMsg (newMsg : Message) {
         msgs.append(newMsg)
     }
@@ -118,6 +134,9 @@ class ListTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
         if let compose = segue.destination as? ComposeTableViewController {
             compose.delegateMsgList = self
+        }
+        if let info = segue.destination as? InfoViewController {
+            info.delegateinfo = self
         }
         
         

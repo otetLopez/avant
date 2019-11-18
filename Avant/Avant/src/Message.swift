@@ -17,7 +17,8 @@ struct Message : CustomStringConvertible {
     var schedule : Date
     
     var description: String {
-        let formattedStr = "To:\t\(self.recipient)\nSchedule:\t\(self.schedule)\nMessage:\n\t\t\(self.msg)"
+        let formattedStr = //"To:\t\(self.recipient)\nSchedule:\t\(self.schedule)\nMessage:\n\t\t\(self.msg)"
+        "Your message\n\(self.title)\nto \(self.recipient)will be sent on\n\(self.schedule)"
         return formattedStr
     }
 }

@@ -26,7 +26,7 @@ class ComposeTableViewController: UITableViewController, MFMailComposeViewContro
     let tfBody = UITextField(frame: CGRect(x: 10, y: 12, width: 200, height: 20))
     let tfRecipient = UITextField(frame: CGRect(x: 50, y: 12, width: 300, height: 20))
     let tfTitle = UITextField(frame: CGRect(x: 130, y: 12, width: 300, height: 20))
-    let tfSender = UITextField(frame: CGRect(x: 70, y: 12, width: 300, height: 20))
+    let tfSender = UITextField(frame: CGRect(x: 50, y: 12, width: 300, height: 20))
 
     //@IBOutlet weak var planeButton: UIButton!
     override func viewDidLoad() {
@@ -42,14 +42,6 @@ class ComposeTableViewController: UITableViewController, MFMailComposeViewContro
         
         tableView.dataSource = self
         tableView.delegate = self
-        //tableView.register(DatePickerTableViewCell.self, forCellReuseIdentifier: "compose")
-        //planeButton.tintColor = UIColor.darkGray
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
@@ -115,6 +107,43 @@ class ComposeTableViewController: UITableViewController, MFMailComposeViewContro
         }
     }
     
+    func checkFlds() -> Bool {
+        var rc : ErrorCodes = .SUCESSFUL
+        var err_msg : String = ""
+        if tfRecipient.text!.isEmpty { err_msg.append("Recipient") }
+        if tfTitle.text!.isEmpty { if !(err_msg.isEmpty) { err_msg.append(", ") }; err_msg.append("Subject") }
+        if tfBody.text!.isEmpty { if !(err_msg.isEmpty) { err_msg.append(", ") }; err_msg.append("Message Body") }
+
+        if !err_msg.isEmpty {
+            err_msg.append("field(s) are empty")
+            alert(title: "Error", msg : err_msg)
+            return false
+        }
+        return true
+    }
+    
+    func alertAddConfirmation()  {
+        let alertController = UIAlertController(title: "Setting Message", message: "Are you sure?", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let sureAction = UIAlertAction(title: "Set it!", style: .destructive) { (action) in
+            self.setMsg()
+        }
+
+        alertController.addAction(cancelAction)
+        alertController.addAction(sureAction)
+               
+        self.present(alertController, animated: true, completion: nil)
+    }
+      
+    func alert(title: String, msg : String) {
+        let alertController = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+          
+        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alertController.addAction(okAction)
+    
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     func clearFlds() {
         msgIdx = -1
         self.delegateMsgList?.msgIdx = msgIdx
@@ -132,6 +161,15 @@ class ComposeTableViewController: UITableViewController, MFMailComposeViewContro
         tableView.reloadData()
     }
 
+    func setMsg () {
+        let newMsg : Message = Message(recipient: tfRecipient.text!, cc: tfSender.text!, title: tfTitle.text!, msg: tfBody.text!, schedule: date)
+        if msgIdx >= 0 {
+            self.delegateMsgList?.deleteMsg(idx: msgIdx)
+            self.delegateMsgList?.addMsg(newMsg: newMsg, idx: msgIdx)
+        } else {
+            self.delegateMsgList?.addMsg(newMsg: newMsg) }
+        clearFlds()
+    }
     
     func indexPathToInsertDatePicker(indexPath: IndexPath) -> IndexPath {
         print("DEBUG: Inserting Date Picker")
@@ -150,9 +188,7 @@ class ComposeTableViewController: UITableViewController, MFMailComposeViewContro
         }
     }
     
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         if datePickerIndexPath == indexPath {
             let datePickerCell = tableView.dequeueReusableCell(withIdentifier: DatePickerTableViewCell.reuseIdentifier()) as! DatePickerTableViewCell
             datePickerCell.updateCell(date: inputDates[indexPath.row - 1], indexPath: indexPath)
@@ -162,7 +198,6 @@ class ComposeTableViewController: UITableViewController, MFMailComposeViewContro
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "compose", for: indexPath)
             // Configure the cell...
-
             let result = formatter.string(from: date)
             
             var cellLbl : String = ""
@@ -172,7 +207,7 @@ class ComposeTableViewController: UITableViewController, MFMailComposeViewContro
                     cellLbl = "To:"
                     cell.contentView.addSubview(tfRecipient)
                 case 1:
-                    cellLbl = "From:"
+                    cellLbl = "Cc:"
                     cell.contentView.addSubview(tfSender)
                 case 2:
                     cellLbl = "Message Title:"
@@ -194,32 +229,25 @@ class ComposeTableViewController: UITableViewController, MFMailComposeViewContro
     }
     
     @IBAction func setmsgButton(_ sender: UIButton) {
-        var details : String = "Setting message on \(date)"
-        details.append("\n\(tfTitle.text)\nTo \(tfRecipient.text)\nCC\(tfSender.text)\nMessage:\n\(tfBody.text)")
-        print(details)
-        
-        let newMsg : Message = Message(recipient: tfRecipient.text!, cc: tfSender.text!, title: tfTitle.text!, msg: tfBody.text!, schedule: date)
-        
-        if msgIdx >= 0 {
-            self.delegateMsgList?.deleteMsg(idx: msgIdx)
-            self.delegateMsgList?.addMsg(newMsg: newMsg, idx: msgIdx)
-        } else {
-            self.delegateMsgList?.addMsg(newMsg: newMsg) }
-        
-        clearFlds()
-        
-       
+        if checkFlds() {
+            var details : String = "DEBUG: Setting message on \(date)"
+            details.append("\n\(tfTitle.text)\nTo \(tfRecipient.text)\nCC\(tfSender.text)\nMessage:\n\(tfBody.text)")
+            print(details)
+            alertAddConfirmation()
+        }
+        /* temporarily disable
         if MFMailComposeViewController.canSendMail() {
             let mailComposeViewController = configureMailComposer(newMsg: newMsg)
             present(mailComposeViewController, animated: true, completion: nil)
         } else {
             print("DEBUG: Cannot send email")
         }
+        */
     }
     
     func configureMailComposer(newMsg: Message) -> MFMailComposeViewController{
-                let mail = MFMailComposeViewController()
-                mail.mailComposeDelegate = self
+        let mail = MFMailComposeViewController()
+        mail.mailComposeDelegate = self
         mail.setSubject(newMsg.title)
         mail.setCcRecipients([newMsg.cc])
         mail.setToRecipients([newMsg.recipient])
@@ -230,60 +258,6 @@ class ComposeTableViewController: UITableViewController, MFMailComposeViewContro
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
     }
-    
-    // extension ComposeTableViewController: DatePickerDelegate {
-        
-//        func didChangeDate(date: Date, indexPath: IndexPath) {
-//            inputDates[indexPath.row] = date
-//            tableView.reloadRows(at: [indexPath], with: .none)
-//        }
-        
-  // }
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension ComposeTableViewController: DatePickerDelegate {
