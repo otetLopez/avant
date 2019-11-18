@@ -26,6 +26,7 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
     var sent = [Message]()
     var msgIdx : Int = -1
     var isEditingList : Bool = false
+    var isScheduleUpdated : Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUserNotificationsCenter()
@@ -68,8 +69,8 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
     }
     
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        msgIdx = indexPath.row
-        print("DEBUG: You selected to view Msg \(msgs[indexPath.row]) at \(msgIdx)")
+        //msgIdx = indexPath.row
+        print("DEBUG: You selected to view Msg \(msgs[indexPath.row]) at \(indexPath.row)")
         alert(title: "Message not yet sent", msg: "\(msgs[indexPath.row])")
         
     }
@@ -118,9 +119,6 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
     }
     
     func addNotification (msg: Message) {
-        // TO DO needs to be changed
-        //msgToSend = msg
-        
         // Request Notification Settings
         UNUserNotificationCenter.current().getNotificationSettings { (notificationSettings) in
             switch notificationSettings.authorizationStatus {
