@@ -194,7 +194,8 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
         //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
 
-        let request = UNNotificationRequest(identifier: /*UUID().uuidString*/"cocoacasts_local_notification", content: content, trigger: trigger)
+        let identifierStr : String = "\(alertMsg.title)\(alertMsg.msgId)"
+        let request = UNNotificationRequest(identifier: /*UUID().uuidString*//*"cocoacasts_local_notification"*/identifierStr, content: content, trigger: trigger)
         center.add(request)
         
         UNUserNotificationCenter.current().add(request) { (error) in
