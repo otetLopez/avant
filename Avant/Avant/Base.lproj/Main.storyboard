@@ -54,6 +54,9 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="Bp1-fU-pXc"/>
                         <barButtonItem image="gobackward" catalog="system" id="3gP-7W-2Nx">
                             <color key="tintColor" red="0.48322331909999999" green="0.45169651509999997" blue="0.40133875610000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <segue destination="Fbp-N9-sL5" kind="show" id="c9v-i5-TPz"/>
+                            </connections>
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Messages" id="jAB-1E-KJX">
@@ -282,6 +285,35 @@
             </objects>
             <point key="canvasLocation" x="958" y="-62"/>
         </scene>
+        <!--History Table View Controller-->
+        <scene sceneID="DD9-5X-OR8">
+            <objects>
+                <tableViewController id="Fbp-N9-sL5" customClass="HistoryTableViewController" customModule="Avant" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="mPT-Oa-Dwm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="history" id="BfZ-Hz-RZ6">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BfZ-Hz-RZ6" id="aU6-z3-0ei">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Fbp-N9-sL5" id="Vzd-4k-3Uj"/>
+                            <outlet property="delegate" destination="Fbp-N9-sL5" id="1Zw-qe-FAu"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="NJy-uT-z1a"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OFF-0v-SeN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="958" y="666"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="xlN-qT-f1y">
             <objects>
@@ -317,6 +349,6 @@
         <image name="square.and.pencil" catalog="system" width="64" height="58"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="kS8-wF-2rM"/>
+        <segue reference="3WI-db-voh"/>
     </inferredMetricsTieBreakers>
 </document>
