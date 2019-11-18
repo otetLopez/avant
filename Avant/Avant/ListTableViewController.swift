@@ -93,7 +93,9 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
     func addMsg (newMsg : Message, idx : Int) {
         msgs.insert(newMsg, at: idx)
         //scheduleNotification(alertMsg: newMsg)
-        addNotification(msg: newMsg)
+        if isScheduleUpdated {
+            addNotification(msg: newMsg)
+        }
     }
     
     func deleteMsg(idx : Int) {

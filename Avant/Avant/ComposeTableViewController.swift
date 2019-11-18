@@ -179,16 +179,28 @@ class ComposeTableViewController: UITableViewController, MFMailComposeViewContro
     }
 
     func setMsg () {
-        if msgIdx >= 0 { }
         let msgId : String = (msgIdx>=0) ? (self.delegateMsgList?.msgs[msgIdx].msgId)! : generateMsgId()
         
         let newMsg : Message = Message(recipient: tfRecipient.text!, cc: tfSender.text!, title: tfTitle.text!, msg: tfBody.text!, msgId: msgId, schedule: date)
         if msgIdx >= 0 {
+            checkSchedule()
             self.delegateMsgList?.deleteMsg(idx: msgIdx)
             self.delegateMsgList?.addMsg(newMsg: newMsg, idx: msgIdx)
         } else {
             self.delegateMsgList?.addMsg(newMsg: newMsg) }
         clearFlds()
+    }
+    
+    func checkSchedule() {
+        let previous = formatter.string(from: (self.delegateMsgList?.msgs[msgIdx].schedule)!)
+        let current = formatter.string(from: date)
+        print("DEBUG: Previous date \(self.delegateMsgList?.msgs[msgIdx].schedule) vs. \(date)")
+        if previous == current {
+            print("DEBUG: Dates are the same")
+            self.delegateMsgList?.isScheduleUpdated = false
+        } else {
+            self.delegateMsgList?.isScheduleUpdated = true
+        }
     }
     
     func indexPathToInsertDatePicker(indexPath: IndexPath) -> IndexPath {
