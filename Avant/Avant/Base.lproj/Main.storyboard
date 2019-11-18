@@ -16,11 +16,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="msglist" textLabel="FiA-uw-paU" detailTextLabel="OsL-xi-C6L" style="IBUITableViewCellStyleSubtitle" id="oFz-vI-IOd">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="msglist" focusStyle="custom" textLabel="FiA-uw-paU" detailTextLabel="OsL-xi-C6L" style="IBUITableViewCellStyleSubtitle" id="oFz-vI-IOd">
                                 <rect key="frame" x="0.0" y="28" width="414" height="49.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oFz-vI-IOd" id="ypf-Bd-65A">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="49.666667938232422"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="370" height="49.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FiA-uw-paU">
@@ -39,6 +39,7 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <segue destination="Xga-OV-GOS" kind="show" id="kS8-wF-2rM"/>
                                 </connections>
@@ -65,6 +66,9 @@
                             </barButtonItem>
                             <barButtonItem image="ellipsis.circle" catalog="system" style="plain" id="LUN-xI-M6d">
                                 <color key="tintColor" red="0.48322331909999999" green="0.45169651509999997" blue="0.40133875610000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="editButtonPressed:" destination="gXS-Ef-gT5" id="XtG-d6-SLR"/>
+                                </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
@@ -73,6 +77,37 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kTx-lf-6Nl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-168.11594202898553" y="-61.607142857142854"/>
+        </scene>
+        <!--Info View Controller-->
+        <scene sceneID="wUG-0o-cYq">
+            <objects>
+                <viewController id="zDL-Eo-eC1" customClass="InfoViewController" customModule="Avant" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RPl-mz-OQP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vAI-if-B4O">
+                                <rect key="frame" x="207.66666666666666" y="448.66666666666669" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                <color key="textColor" systemColor="systemGrayColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="vAI-if-B4O" firstAttribute="centerX" secondItem="RPl-mz-OQP" secondAttribute="centerX" constant="0.5" id="98n-gf-0zO"/>
+                            <constraint firstItem="vAI-if-B4O" firstAttribute="centerY" secondItem="RPl-mz-OQP" secondAttribute="centerY" constant="0.5" id="Qep-36-Ruz"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6RQ-u3-2TI"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="RS4-sX-fBf"/>
+                    <connections>
+                        <outlet property="details" destination="vAI-if-B4O" id="auU-vX-lZ4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="087-ze-jIY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="957.97101449275374" y="-714.50892857142856"/>
         </scene>
         <!--Compose View Controller-->
         <scene sceneID="ZLQ-UL-uHI">
@@ -184,7 +219,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZXt-Qg-Tcd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="W7H-WB-TzF" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1435" y="-814"/>
+            <point key="canvasLocation" x="1987" y="-834"/>
         </scene>
         <!--New Message-->
         <scene sceneID="C62-Ji-Kxn">
@@ -250,8 +285,9 @@
         <!--Navigation Controller-->
         <scene sceneID="xlN-qT-f1y">
             <objects>
-                <navigationController id="n5w-bp-9WB" sceneMemberID="viewController">
+                <navigationController toolbarHidden="NO" id="n5w-bp-9WB" sceneMemberID="viewController">
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="LCM-P1-zIA">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -260,6 +296,10 @@
                             <color key="textColor" red="0.48322331909999999" green="0.45169651509999997" blue="0.40133875610000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </textAttributes>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kOA-S8-bQI">
+                        <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="gXS-Ef-gT5" kind="relationship" relationship="rootViewController" id="kXX-GM-Ke4"/>
                     </connections>
@@ -277,6 +317,6 @@
         <image name="square.and.pencil" catalog="system" width="64" height="58"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="3WI-db-voh"/>
+        <segue reference="kS8-wF-2rM"/>
     </inferredMetricsTieBreakers>
 </document>

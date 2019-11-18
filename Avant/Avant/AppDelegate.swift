@@ -9,12 +9,23 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let center = UNUserNotificationCenter.current()
+        center.delegate = self // Don't forgot to set delegate
+
+        //To get permissions from user:
+        let options: UNAuthorizationOptions = [.alert, .sound, .badge];
+        center.requestAuthorization(options: options) {
+            (granted, error) in
+            if !granted {
+                print("DEBUG: Something went wrong")
+            }
+        }
+        
         return true
     }
 
