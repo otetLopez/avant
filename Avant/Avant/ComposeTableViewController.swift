@@ -160,9 +160,28 @@ class ComposeTableViewController: UITableViewController, MFMailComposeViewContro
         
         tableView.reloadData()
     }
+    
+    func generateMsgId () -> String {
+        let format = DateFormatter()
+        format.dateFormat = "ddMMyyHHmm"
+        var formattedId : String = format.string(from: date)
+        var count : Int = 0
+        if self.delegateMsgList?.msgs.count ?? 0 > 0 {
+            for idx in self.delegateMsgList!.msgs {
+                if idx.msgId.contains(formattedId) {
+                    count += 1
+                }
+            }
+        }
+        formattedId.append("\(count)")
+        return formattedId
+    }
 
     func setMsg () {
-        let newMsg : Message = Message(recipient: tfRecipient.text!, cc: tfSender.text!, title: tfTitle.text!, msg: tfBody.text!, schedule: date)
+        if msgIdx >= 0 { }
+        let msgId : String = (msgIdx>=0) ? (self.delegateMsgList?.msgs[msgIdx].msgId)! : generateMsgId()
+        
+        let newMsg : Message = Message(recipient: tfRecipient.text!, cc: tfSender.text!, title: tfTitle.text!, msg: tfBody.text!, msgId: msgId, schedule: date)
         if msgIdx >= 0 {
             self.delegateMsgList?.deleteMsg(idx: msgIdx)
             self.delegateMsgList?.addMsg(newMsg: newMsg, idx: msgIdx)

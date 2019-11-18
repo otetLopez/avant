@@ -24,6 +24,7 @@
 		F5C86B3A237F37420071646A /* DatePickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5C86B39237F37410071646A /* DatePickerTableViewCell.xib */; };
 		F5C86B3C2381F3DF0071646A /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C86B3B2381F3DF0071646A /* Email.swift */; };
 		F5C86B3E23821AEE0071646A /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C86B3D23821AEE0071646A /* InfoViewController.swift */; };
+		F5C86B42238280FB0071646A /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C86B41238280FA0071646A /* HistoryTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		F5C86B39237F37410071646A /* DatePickerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DatePickerTableViewCell.xib; sourceTree = "<group>"; };
 		F5C86B3B2381F3DF0071646A /* Email.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Email.swift; sourceTree = "<group>"; };
 		F5C86B3D23821AEE0071646A /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		F5C86B41238280FA0071646A /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 				F527E6372379043D00B80116 /* ComposeTableViewController.swift */,
 				F527E6392379145E00B80116 /* ComposeViewController.swift */,
 				F5C86B3D23821AEE0071646A /* InfoViewController.swift */,
+				F5C86B41238280FA0071646A /* HistoryTableViewController.swift */,
 			);
 			path = Avant;
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 				F527E62B2378D6B600B80116 /* Recipient.swift in Sources */,
 				F5C86B3E23821AEE0071646A /* InfoViewController.swift in Sources */,
 				F5C86B35237F32CB0071646A /* DatePickerTableViewCell.swift in Sources */,
+				F5C86B42238280FB0071646A /* HistoryTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

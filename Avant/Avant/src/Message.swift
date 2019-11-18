@@ -14,11 +14,15 @@ struct Message : CustomStringConvertible {
     var cc : String
     var title : String
     var msg : String
+    var msgId : String
     var schedule : Date
     
     var description: String {
+        let format = DateFormatter()
+        format.dateFormat = "dd-MM-yy HH:mm:SS"
+        let sched : String = format.string(from: self.schedule)
         let formattedStr = //"To:\t\(self.recipient)\nSchedule:\t\(self.schedule)\nMessage:\n\t\t\(self.msg)"
-        "Your message\n\(self.title)\nto \(self.recipient)will be sent on\n\(self.schedule)"
+        "Your message\n\(self.title)\nto \(self.recipient) will be sent on\n\(sched)"
         return formattedStr
     }
 }

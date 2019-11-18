@@ -23,9 +23,9 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
     }
     
     var msgs = [Message]()
+    var sent = [Message]()
     var msgIdx : Int = -1
     var isEditingList : Bool = false
-    var msgToSend : Message?
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUserNotificationsCenter()
@@ -119,7 +119,7 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
     
     func addNotification (msg: Message) {
         // TO DO needs to be changed
-        msgToSend = msg
+        //msgToSend = msg
         
         // Request Notification Settings
         UNUserNotificationCenter.current().getNotificationSettings { (notificationSettings) in
@@ -176,7 +176,7 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
         let content = UNMutableNotificationContent()
         content.title = alertMsg.title
         content.body = alertMsg.msg
-        content.subtitle = "Local Notifications"
+        content.subtitle = alertMsg.msgId
         content.categoryIdentifier = Notification.Category.alarm
         content.userInfo = ["customData": "fizzbuzz"]
         content.sound = UNNotificationSound.default
@@ -189,7 +189,8 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
         dateComponents.day = calendar.component(.day, from: alertMsg.schedule)
         dateComponents.hour = calendar.component(.hour, from: alertMsg.schedule)
         dateComponents.minute = calendar.component(.minute, from: alertMsg.schedule)
-        dateComponents.second = calendar.component(.second, from: alertMsg.schedule)
+        dateComponents.second = 0//calendar.component(.second, from: alertMsg.schedule)
+        
         //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
 
@@ -203,11 +204,25 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
         }
     }
     
-    func sendemail() {
-        if MFMailComposeViewController.canSendMail() {
-            let mailComposeViewController = configureMailComposer(newMsg: msgToSend!)
-            present(mailComposeViewController, animated: true, completion: nil)
-        } else { print("DEBUG: Cannot send email") }
+    func sendemail(id : String) {
+        var isMsgSending : Bool = false
+        var msgToSend : Message
+        var idx : Int = 0
+        for message in msgs {
+            if message.msgId == id {
+                msgToSend = message
+                isMsgSending = true
+                if MFMailComposeViewController.canSendMail() {
+                    let mailComposeViewController = configureMailComposer(newMsg: msgToSend)
+                    present(mailComposeViewController, animated: true, completion: nil)
+                    //updateLists(msg: msgToSend)
+                    updateLists(idx: idx)
+                } else { print("DEBUG: Cannot send email") }
+                break
+            }
+            idx += 1
+        }
+        print("DEBUG: Message sending \(isMsgSending)")
     }
         
     func configureMailComposer(newMsg: Message) -> MFMailComposeViewController  {
@@ -220,6 +235,20 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
         return mail
     }
     
+    //func updateLists(msg : Message) {
+    func updateLists(idx : Int) {
+//        var idx : Int = 0
+//        for message in msgs {
+//            if message.msgId == msg.msgId {
+//                break
+//            }
+//            idx += 1
+//        }
+        sent.append(msgs[idx])
+        msgs.remove(at: idx)
+        tableView.reloadData()
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
@@ -229,7 +258,10 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
         if let info = segue.destination as? InfoViewController {
             info.delegateinfo = self
         }
-        
+        if let history = segue.destination as? HistoryTableViewController {
+            history.delegatehistory = self
+        }
+
         let backItem = UIBarButtonItem()
         backItem.title = "Messages"
         navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
@@ -245,7 +277,9 @@ extension ListTableViewController {
         switch response.actionIdentifier {
         case Notification.Action.send:
             print("DEBUG: Sending your precious email")
-            sendemail()
+            print("original body was : \(response.notification.request.content.subtitle)")
+            var msgId : String = response.notification.request.content.subtitle
+            sendemail(id: msgId)
         case Notification.Action.cancel:
             print("DEBUG: Ignoring whatever you have decided to set day(s) ago")
         default:
