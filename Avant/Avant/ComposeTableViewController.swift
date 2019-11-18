@@ -60,7 +60,7 @@ class ComposeTableViewController: UITableViewController, MFMailComposeViewContro
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        if indexPath.row == 2 { //3 {
+        if indexPath.row == 2 {
             tableView.beginUpdates()
             if let datePickerIndexPath = datePickerIndexPath, datePickerIndexPath.row - 1 == indexPath.row {
                 tableView.deleteRows(at: [datePickerIndexPath], with: .fade)
@@ -238,9 +238,9 @@ class ComposeTableViewController: UITableViewController, MFMailComposeViewContro
                 case 0:
                     cellLbl = "To:"
                     cell.contentView.addSubview(tfRecipient)
-                //case 1:
-                //    cellLbl = "Cc:"
-                //    cell.contentView.addSubview(tfSender)
+//                case 1:
+//                    cellLbl = "Cc:"
+//                    cell.contentView.addSubview(tfSender)
                 case 1:
                     cellLbl = "Message Title:"
                     cell.contentView.addSubview(tfTitle)
@@ -267,14 +267,15 @@ class ComposeTableViewController: UITableViewController, MFMailComposeViewContro
             print(details)
             alertAddConfirmation()
         }
-        /* temporarily disable
+        /*  //temporarily disable
+        let newMsg : Message = Message(recipient: tfRecipient.text!, cc: tfSender.text!, title: tfTitle.text!, msg: tfBody.text!, msgId: "", schedule: date)
         if MFMailComposeViewController.canSendMail() {
             let mailComposeViewController = configureMailComposer(newMsg: newMsg)
             present(mailComposeViewController, animated: true, completion: nil)
         } else {
             print("DEBUG: Cannot send email")
         }
-        */
+       */
     }
     
     func configureMailComposer(newMsg: Message) -> MFMailComposeViewController{

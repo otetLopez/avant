@@ -52,7 +52,13 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
         cell.textLabel?.text = msgs[indexPath.row].title
         cell.detailTextLabel?.text = msgs[indexPath.row].recipient
         // Configure the cell...
-
+        if !checkDate(date: msgs[indexPath.row].schedule) {
+            self.tableView.cellForRow(at: indexPath)?.accessoryView?.tintColor = UIColor.red
+            cell.tintColor = UIColor.red
+        } else {
+            self.tableView.cellForRow(at: indexPath)?.accessoryView?.tintColor = UIColor.darkGray
+            cell.tintColor = UIColor.darkGray
+        }
         return cell
     }
     
@@ -81,7 +87,7 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
     }
     
     func checkDate(date: Date) -> Bool {
-        if date <  Date() {
+        if date  <  Date()  || date == Date() {
             print("DEBUG: date is earlier than current date")
             return false
         }
@@ -94,7 +100,6 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
         let cancelAction = UIAlertAction(title: "Ignore", style: .cancel, handler: nil)
         let sendAction = UIAlertAction(title: "Send It!", style: .destructive) { (action) in
             self.sendemail(idx: idx)
-            self.updateLists(idx: idx)
         }
         sendAction.setValue(UIColor.red, forKey: "titleTextColor")
 
@@ -233,7 +238,8 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
     
     func sendemail(idx: Int) {
         if MFMailComposeViewController.canSendMail() {
-            let mailComposeViewController = configureMailComposer(newMsg: msgs[idx])
+            var msgToSend : Message = msgs[idx]
+            let mailComposeViewController = configureMailComposer(newMsg: msgToSend)
             present(mailComposeViewController, animated: true, completion: nil)
             updateLists(idx: idx)
         } else { print("DEBUG: Cannot send email") }
@@ -262,6 +268,7 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
         
     func configureMailComposer(newMsg: Message) -> MFMailComposeViewController  {
         let mail = MFMailComposeViewController()
+        print("DEBUG: configureMailComposer \(newMsg)")
         mail.mailComposeDelegate = self
         mail.setSubject(newMsg.title)
         mail.setCcRecipients([newMsg.cc])
