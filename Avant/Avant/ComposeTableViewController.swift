@@ -60,6 +60,9 @@ class ComposeTableViewController: UITableViewController, MFMailComposeViewContro
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
+        self.tableView.cellForRow(at: indexPath)?.isHighlighted = false
+        self.tableView.cellForRow(at: indexPath)?.selectionStyle = .none
+        
         if indexPath.row == 2 {
             tableView.beginUpdates()
             if let datePickerIndexPath = datePickerIndexPath, datePickerIndexPath.row - 1 == indexPath.row {
@@ -91,11 +94,11 @@ class ComposeTableViewController: UITableViewController, MFMailComposeViewContro
         tfRecipient.placeholder = "recipient@email.com"
         tfSender.placeholder = "sender@email.com"
         tfTitle.placeholder = "Some title"
+        tfBody.autocorrectionType = .no
         tfRecipient.autocorrectionType = .no
         tfSender.autocorrectionType = .no
         tfTitle.autocorrectionType = .no
-        tfBody.autocorrectionType = .no
-        
+ 
         tfRecipient.autocapitalizationType = .none
         tfSender.autocapitalizationType = .none
         
