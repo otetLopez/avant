@@ -22,7 +22,7 @@ struct Message : CustomStringConvertible {
         format.dateFormat = "dd-MM-yy HH:mm:SS"
         let sched : String = format.string(from: self.schedule)
         let formattedStr = //"To:\t\(self.recipient)\nSchedule:\t\(self.schedule)\nMessage:\n\t\t\(self.msg)"
-        "Your message\n\(self.title)\nto \(self.recipient) will be sent on\n\(sched)"
+        "Your message: \(self.title)\nTo: \(self.recipient)\nScheduled: \(sched)\nContains:\n\(self.msg)"
         return formattedStr
     }
 }

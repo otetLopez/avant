@@ -12,6 +12,7 @@ class HistoryTableViewController: UITableViewController {
     
     weak var delegatehistory: ListTableViewController?
     var msgs = [Message]()
+    var msgIdx : Int = -1
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +38,14 @@ class HistoryTableViewController: UITableViewController {
         return self.delegatehistory?.sent.count ?? 0
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        msgIdx = indexPath.row
+        print("DEBUG: You selected sent msg \(msgs[indexPath.row].title)")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        msgIdx = -1
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "history", for: indexPath)
@@ -84,14 +93,13 @@ class HistoryTableViewController: UITableViewController {
     }
     */
 
-    /*
-    // MARK: - Navigation
-
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if let info = segue.destination as? InfoViewController {
+            info.delegateinfo = self
+        }
     }
-    */
 
 }

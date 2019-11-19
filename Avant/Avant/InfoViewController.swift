@@ -11,13 +11,13 @@ import UIKit
 class InfoViewController: UIViewController {
 
     @IBOutlet weak var details: UILabel!
-    weak var delegateinfo: ListTableViewController?
+    weak var delegateinfo: HistoryTableViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        details.text! = ("\(String(describing: self.delegateinfo?.msgs[self.delegateinfo!.msgIdx]))")
+        details.text! = ("\((self.delegateinfo?.msgs[self.delegateinfo!.msgIdx])!)")
     }
     
 

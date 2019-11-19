@@ -302,9 +302,6 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
         if let compose = segue.destination as? ComposeTableViewController {
             compose.delegateMsgList = self
         }
-        if let info = segue.destination as? InfoViewController {
-            info.delegateinfo = self
-        }
         if let history = segue.destination as? HistoryTableViewController {
             history.delegatehistory = self
         }
