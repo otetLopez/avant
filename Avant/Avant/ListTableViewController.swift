@@ -93,9 +93,19 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
     }
     
     func checkDate(date: Date) -> Bool {
-        print("DEBUG: Schedule \(date) vs. \(Date())")
-        if date  <  Date()  || date == Date() {
+        let current : Date = Date()
+        print("DEBUG: Schedule \(date) vs. \(current)")
+        if date  <  current  || date == current {
             print("DEBUG: date is earlier than current date")
+            return false
+        }
+        let format = DateFormatter()
+        format.dateFormat = "dd-MM-yy HH:mm"
+        let sched : String = format.string(from: date)
+        let now : String = format.string(from: current)
+        print("DEBUG: \(sched) vs \(now) than current date")
+        if sched == now {
+            print("DEBUG: Time to send message")
             return false
         }
         return true
