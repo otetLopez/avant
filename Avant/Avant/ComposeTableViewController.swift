@@ -183,8 +183,9 @@ class ComposeTableViewController: UITableViewController, MFMailComposeViewContro
 
     func setMsg () {
         let msgId : String = (msgIdx>=0) ? (self.delegateMsgList?.msgs[msgIdx].msgId)! : generateMsgId()
-        
-        let newMsg : Message = Message(recipient: tfRecipient.text!, cc: tfSender.text!, title: tfTitle.text!, msg: tfBody.text!, msgId: msgId, schedule: date)
+        let fixDate = Calendar.current.date(bySetting: .second, value: 0, of: date)!
+        print("DEBUG: Set schedule will be on \(fixDate)")
+        let newMsg : Message = Message(recipient: tfRecipient.text!, cc: tfSender.text!, title: tfTitle.text!, msg: tfBody.text!, msgId: msgId, schedule: fixDate)
         if msgIdx >= 0 {
             checkSchedule()
             self.delegateMsgList?.deleteMsg(idx: msgIdx)

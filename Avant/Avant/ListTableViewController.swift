@@ -25,6 +25,7 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
     var msgs = [Message]()
     var sent = [Message]()
     var msgIdx : Int = -1
+    var mccIdx : Int = -1
     var isEditingList : Bool = false
     var isScheduleUpdated : Bool = false
     override func viewDidLoad() {
@@ -87,6 +88,7 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
     }
     
     func checkDate(date: Date) -> Bool {
+        print("DEBUG: Schedule \(date) vs. \(Date())")
         if date  <  Date()  || date == Date() {
             print("DEBUG: date is earlier than current date")
             return false
@@ -241,7 +243,8 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
             var msgToSend : Message = msgs[idx]
             let mailComposeViewController = configureMailComposer(newMsg: msgToSend)
             present(mailComposeViewController, animated: true, completion: nil)
-            updateLists(idx: idx)
+            mccIdx = idx
+            //updateLists(idx: idx)
         } else { print("DEBUG: Cannot send email") }
     }
     
@@ -257,7 +260,8 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
                     let mailComposeViewController = configureMailComposer(newMsg: msgToSend)
                     present(mailComposeViewController, animated: true, completion: nil)
                     //updateLists(msg: msgToSend)
-                    updateLists(idx: idx)
+                    //updateLists(idx: idx)
+                    mccIdx = idx
                     //mailComposeViewController.dismiss(animated: true, completion: nil)
                 } else { print("DEBUG: Cannot send email") }
                 break
@@ -286,6 +290,15 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
          print("DEBUG: Message is sent 2 ")
+        switch result {
+        case .sent:
+            updateLists(idx: mccIdx)
+        case .failed:
+            alert(title: "Error", msg: "MFMailComposeViewController failed to send message")
+        default:
+            alert(title: "Warning", msg: "User opt not to send email")
+        }
+        mccIdx = -1
         // Dismiss the mail compose view controller.
         controller.dismiss(animated: true, completion: nil)
     }
