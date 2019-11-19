@@ -84,7 +84,12 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
             // We need to let user send email
             alert(title: "Your message is due", idx: indexPath.row)
         }
-        
+    }
+    
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let movedObject = self.msgs[sourceIndexPath.row]
+        msgs.remove(at: sourceIndexPath.row)
+        msgs.insert(movedObject, at: destinationIndexPath.row)
     }
     
     func checkDate(date: Date) -> Bool {
