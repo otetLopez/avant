@@ -17,7 +17,7 @@ class InfoViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        //details.text! = ("\(String(describing: self.delegateinfo?.msgs[self.delegateinfo!.msgIdx]))")
+        details.text! = ("\(String(describing: self.delegateinfo?.msgs[self.delegateinfo!.msgIdx]))")
     }
     
 
