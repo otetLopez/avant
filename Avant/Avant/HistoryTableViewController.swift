@@ -43,6 +43,11 @@ class HistoryTableViewController: UITableViewController {
         print("DEBUG: You selected sent msg \(msgs[indexPath.row].title)")
     }
     
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        msgIdx = indexPath.row
+        print("DEBUG: You selected sent msg \(msgs[indexPath.row].title)")
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         msgIdx = -1
     }
