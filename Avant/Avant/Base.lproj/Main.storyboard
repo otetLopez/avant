@@ -171,7 +171,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tna-f7-PcT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="958" y="-62"/>
+            <point key="canvasLocation" x="957.97101449275374" y="-62.276785714285708"/>
         </scene>
         <!--History-->
         <scene sceneID="DD9-5X-OR8">

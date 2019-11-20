@@ -13,6 +13,8 @@ class ComposeTableViewController: UITableViewController, MFMailComposeViewContro
 
      weak var delegateMsgList: ListTableViewController?
     
+
+    
     var datePickerIndexPath: IndexPath?
     var isPickingDate : Bool = false
     var inputTexts: [String] = ["Start date", "End date", "Another date"]
@@ -43,14 +45,16 @@ class ComposeTableViewController: UITableViewController, MFMailComposeViewContro
         tableView.dataSource = self
         tableView.delegate = self
         
-        //let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
-        //self.view.addGestureRecognizer(tapGesture)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
+        tapGesture.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tapGesture)
     }
     
-    @objc func viewTapped() {
-        //tfBody.resignFirstResponder()
-        //tfRecipient.resignFirstResponder()
-        //tfTitle.resignFirstResponder()
+    @objc func viewTapped(_ sender: UIView) {
+        tfBody.resignFirstResponder()
+        tfRecipient.resignFirstResponder()
+        tfTitle.resignFirstResponder()
+        //cells.resignFirstResponder()
         //tfSender.resignFirstResponder()
     }
     
@@ -72,7 +76,7 @@ class ComposeTableViewController: UITableViewController, MFMailComposeViewContro
     {
         self.tableView.cellForRow(at: indexPath)?.isHighlighted = false
         self.tableView.cellForRow(at: indexPath)?.selectionStyle = .none
-        
+        print("DEBUG: DidSelect \(indexPath.row)")
         if indexPath.row == 2 {
             tableView.beginUpdates()
             if let datePickerIndexPath = datePickerIndexPath, datePickerIndexPath.row - 1 == indexPath.row {
@@ -80,12 +84,12 @@ class ComposeTableViewController: UITableViewController, MFMailComposeViewContro
                 self.datePickerIndexPath = nil
             } else {
                 print("DEBUG: Setting DatePicker")
-                if let datePickerIndexPath = datePickerIndexPath {
-                    tableView.deleteRows(at: [datePickerIndexPath], with: .fade)
-                }
+//                if let datePickerIndexPath = datePickerIndexPath {
+//                    tableView.deleteRows(at: [datePickerIndexPath], with: .fade)
+//                }
                 datePickerIndexPath = indexPathToInsertDatePicker(indexPath: indexPath)
                 tableView.insertRows(at: [datePickerIndexPath!], with: .fade)
-                tableView.deselectRow(at: indexPath, animated: true)
+//                tableView.deselectRow(at: indexPath, animated: true)
             }
             tableView.endUpdates()
         }
