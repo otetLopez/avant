@@ -12,13 +12,11 @@
 		F527E61D2378CD2C00B80116 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F527E61B2378CD2C00B80116 /* Main.storyboard */; };
 		F527E61F2378CD3000B80116 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F527E61E2378CD3000B80116 /* Assets.xcassets */; };
 		F527E6222378CD3000B80116 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F527E6202378CD3000B80116 /* LaunchScreen.storyboard */; };
-		F527E62B2378D6B600B80116 /* Recipient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F527E62A2378D6B600B80116 /* Recipient.swift */; };
 		F527E62E2378DDBF00B80116 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = F527E62D2378DDBF00B80116 /* Message.swift */; };
 		F527E6302378DF9A00B80116 /* ErrorCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F527E62F2378DF9900B80116 /* ErrorCodes.swift */; };
 		F527E6322378E14E00B80116 /* ListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F527E6312378E14E00B80116 /* ListTableViewController.swift */; };
 		F527E6362378E6E200B80116 /* write_msg.png in Resources */ = {isa = PBXBuildFile; fileRef = F527E6352378E6E100B80116 /* write_msg.png */; };
 		F527E6382379043D00B80116 /* ComposeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F527E6372379043D00B80116 /* ComposeTableViewController.swift */; };
-		F527E63A2379145E00B80116 /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F527E6392379145E00B80116 /* ComposeViewController.swift */; };
 		F5C86B33237F328E0071646A /* DateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C86B32237F328E0071646A /* DateTableViewCell.swift */; };
 		F5C86B35237F32CB0071646A /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C86B34237F32CB0071646A /* DatePickerTableViewCell.swift */; };
 		F5C86B3A237F37420071646A /* DatePickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5C86B39237F37410071646A /* DatePickerTableViewCell.xib */; };
@@ -35,13 +33,11 @@
 		F527E61E2378CD3000B80116 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F527E6212378CD3000B80116 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F527E6232378CD3000B80116 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F527E62A2378D6B600B80116 /* Recipient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipient.swift; sourceTree = "<group>"; };
 		F527E62D2378DDBF00B80116 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		F527E62F2378DF9900B80116 /* ErrorCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCodes.swift; sourceTree = "<group>"; };
 		F527E6312378E14E00B80116 /* ListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewController.swift; sourceTree = "<group>"; };
 		F527E6352378E6E100B80116 /* write_msg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = write_msg.png; sourceTree = "<group>"; };
 		F527E6372379043D00B80116 /* ComposeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeTableViewController.swift; sourceTree = "<group>"; };
-		F527E6392379145E00B80116 /* ComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
 		F5C86B32237F328E0071646A /* DateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTableViewCell.swift; sourceTree = "<group>"; };
 		F5C86B34237F32CB0071646A /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerTableViewCell.swift; sourceTree = "<group>"; };
 		F5C86B39237F37410071646A /* DatePickerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DatePickerTableViewCell.xib; sourceTree = "<group>"; };
@@ -91,7 +87,6 @@
 				F527E6232378CD3000B80116 /* Info.plist */,
 				F527E6312378E14E00B80116 /* ListTableViewController.swift */,
 				F527E6372379043D00B80116 /* ComposeTableViewController.swift */,
-				F527E6392379145E00B80116 /* ComposeViewController.swift */,
 				F5C86B3D23821AEE0071646A /* InfoViewController.swift */,
 				F5C86B41238280FA0071646A /* HistoryTableViewController.swift */,
 			);
@@ -101,7 +96,6 @@
 		F527E6292378D6A600B80116 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				F527E62A2378D6B600B80116 /* Recipient.swift */,
 				F527E62D2378DDBF00B80116 /* Message.swift */,
 				F527E62F2378DF9900B80116 /* ErrorCodes.swift */,
 				F5C86B32237F328E0071646A /* DateTableViewCell.swift */,
@@ -203,13 +197,11 @@
 				F527E6162378CD2C00B80116 /* AppDelegate.swift in Sources */,
 				F527E62E2378DDBF00B80116 /* Message.swift in Sources */,
 				F527E6302378DF9A00B80116 /* ErrorCodes.swift in Sources */,
-				F527E63A2379145E00B80116 /* ComposeViewController.swift in Sources */,
 				F5C86B3C2381F3DF0071646A /* Email.swift in Sources */,
 				F527E6382379043D00B80116 /* ComposeTableViewController.swift in Sources */,
 				F527E6322378E14E00B80116 /* ListTableViewController.swift in Sources */,
 				F527E6182378CD2C00B80116 /* SceneDelegate.swift in Sources */,
 				F5C86B33237F328E0071646A /* DateTableViewCell.swift in Sources */,
-				F527E62B2378D6B600B80116 /* Recipient.swift in Sources */,
 				F5C86B3E23821AEE0071646A /* InfoViewController.swift in Sources */,
 				F5C86B35237F32CB0071646A /* DatePickerTableViewCell.swift in Sources */,
 				F5C86B42238280FB0071646A /* HistoryTableViewController.swift in Sources */,

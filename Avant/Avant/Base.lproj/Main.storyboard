@@ -173,7 +173,7 @@
             </objects>
             <point key="canvasLocation" x="958" y="-62"/>
         </scene>
-        <!--History Table View Controller-->
+        <!--History-->
         <scene sceneID="DD9-5X-OR8">
             <objects>
                 <tableViewController id="Fbp-N9-sL5" customClass="HistoryTableViewController" customModule="Avant" customModuleProvider="target" sceneMemberID="viewController">
@@ -216,7 +216,7 @@
                             <outlet property="delegate" destination="Fbp-N9-sL5" id="1Zw-qe-FAu"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="NJy-uT-z1a"/>
+                    <navigationItem key="navigationItem" title="History" largeTitleDisplayMode="always" id="NJy-uT-z1a"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OFF-0v-SeN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
