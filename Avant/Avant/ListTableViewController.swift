@@ -28,8 +28,10 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
     var mccIdx : Int = -1
     var isEditingList : Bool = false
     var isScheduleUpdated : Bool = false
+    let format = DateFormatter()
     override func viewDidLoad() {
         super.viewDidLoad()
+        format.dateFormat = "dd-MM-yy HH:mm"
         configureUserNotificationsCenter()
     }
     
@@ -79,7 +81,7 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
         //msgIdx = indexPath.row
         print("DEBUG: You selected to view Msg \(msgs[indexPath.row]) at \(indexPath.row)")
         if checkDate(date: msgs[indexPath.row].schedule) {
-            alert(title: "Message not yet sent", msg: "\(msgs[indexPath.row])")
+            alert(title: "Message not yet sent", msg: "\(getTimeLeft(date: msgs[indexPath.row].schedule))")
         } else {
             // We need to let user send email
             alert(title: "Your message is due", idx: indexPath.row)
@@ -92,6 +94,17 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
         msgs.insert(movedObject, at: destinationIndexPath.row)
     }
     
+    func getTimeLeft(date: Date) -> String {
+        let components = Calendar.current.dateComponents([.hour, .minute, .second, .day, .weekOfYear, .month, .year], from: Date(), to: date)
+        var msg : String = ""
+        if components.year ?? 0 > 0 { msg.append("\(components.year ?? 0) year(s), ") }
+        if components.month ?? 0 > 0 { msg.append("\(components.month ?? 0) month(s), ") }
+        if components.day ?? 0 > 0 { msg.append("\(components.year ?? 0) day(s), ") }
+        msg.append("\(String(format: "%02d", components.hour ?? 0)):\(String(format: "%02d", components.minute ?? 0)):\(String(format: "%02d", components.second ?? 0)) left to send message")
+        return msg
+        
+    }
+    
     func checkDate(date: Date) -> Bool {
         let current : Date = Date()
         print("DEBUG: Schedule \(date) vs. \(current)")
@@ -99,8 +112,7 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
             print("DEBUG: date is earlier than current date")
             return false
         }
-        let format = DateFormatter()
-        format.dateFormat = "dd-MM-yy HH:mm"
+
         let sched : String = format.string(from: date)
         let now : String = format.string(from: current)
         print("DEBUG: \(sched) vs \(now) than current date")
