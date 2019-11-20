@@ -122,7 +122,6 @@ class ComposeTableViewController: UITableViewController, MFMailComposeViewContro
     }
     
     func checkFlds() -> Bool {
-        var rc : ErrorCodes = .SUCESSFUL
         var err_msg : String = ""
         if tfRecipient.text!.isEmpty { err_msg.append("Recipient") }
         if tfTitle.text!.isEmpty { if !(err_msg.isEmpty) { err_msg.append(", ") }; err_msg.append("Subject") }
