@@ -43,15 +43,15 @@ class ComposeTableViewController: UITableViewController, MFMailComposeViewContro
         tableView.dataSource = self
         tableView.delegate = self
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
-        self.view.addGestureRecognizer(tapGesture)
+        //let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
+        //self.view.addGestureRecognizer(tapGesture)
     }
     
     @objc func viewTapped() {
-        tfBody.resignFirstResponder()
-        tfRecipient.resignFirstResponder()
-        tfTitle.resignFirstResponder()
-        tfSender.resignFirstResponder()
+        //tfBody.resignFirstResponder()
+        //tfRecipient.resignFirstResponder()
+        //tfTitle.resignFirstResponder()
+        //tfSender.resignFirstResponder()
     }
     
     // MARK: - Table view data source
