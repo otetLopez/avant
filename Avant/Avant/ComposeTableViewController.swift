@@ -263,7 +263,7 @@ class ComposeTableViewController: UITableViewController, MFMailComposeViewContro
                     cell.contentView.addSubview(tfTitle)
                 case 2:
                     cellLbl = "Schedule"
-                    print("DEBUG: The date today is \(result)")
+                    print("DEBUG: The date set is \(result)")
                     cell.detailTextLabel?.text = result
                 default: break
                 }
@@ -314,7 +314,10 @@ extension ComposeTableViewController: DatePickerDelegate {
     
     func didChangeDate(date: Date, indexPath: IndexPath) {
         inputDates[indexPath.row] = date
-        self.date = date
+        let sched = Calendar.current.date(bySetting: .second, value: 0, of: date)!
+        self.date = Calendar.current.date(byAdding: .minute, value: -1, to: sched)!
+        
+        print("DEBUG: Date set is \(self.date)")
         tableView.reloadRows(at: [indexPath], with: .none)
     }
     
