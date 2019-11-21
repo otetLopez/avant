@@ -311,7 +311,6 @@ class ComposeTableViewController: UITableViewController, MFMailComposeViewContro
 }
 
 extension ComposeTableViewController: DatePickerDelegate {
-    
     func didChangeDate(date: Date, indexPath: IndexPath) {
         inputDates[indexPath.row] = date
         let sched = Calendar.current.date(bySetting: .second, value: 0, of: date)!
