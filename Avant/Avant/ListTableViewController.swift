@@ -97,9 +97,9 @@ class ListTableViewController: UITableViewController, UNUserNotificationCenterDe
     func getTimeLeft(date: Date) -> String {
         let components = Calendar.current.dateComponents([.hour, .minute, .second, .day, .weekOfYear, .month, .year], from: Date(), to: date)
         var msg : String = ""
-        if components.year ?? 0 > 0 { msg.append("\(components.year ?? 0) year(s), ") }
-        if components.month ?? 0 > 0 { msg.append("\(components.month ?? 0) month(s), ") }
-        if components.day ?? 0 > 0 { msg.append("\(components.year ?? 0) day(s), ") }
+        if components.year ?? 0 > 0 { msg.append("\(components.year!) year(s), ") }
+        if components.month ?? 0 > 0 { msg.append("\(components.month!) month(s), ") }
+        if components.day ?? 0 > 0 { msg.append("\(components.day!) day(s), ") }
         msg.append("\(String(format: "%02d", components.hour ?? 0)):\(String(format: "%02d", components.minute ?? 0)):\(String(format: "%02d", components.second ?? 0)) left to send message")
         return msg
         
